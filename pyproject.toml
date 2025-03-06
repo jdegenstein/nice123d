@@ -1,3 +1,9 @@
+[info]
+file = "pyproject.toml"
+file-id = "d94687d2-2b13-4605-abee-631465911c30"
+project = "nice123d"
+project-id = "e2bbd03f-0ac6-41ec-89ae-2ad52fa0652a"
+
 [build-system]
 requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
@@ -6,12 +12,23 @@ build-backend = "setuptools.build_meta"
 name = "nice123d"
 version = "0.0.2"
 dependencies = [
-  "build123d",
+  "build123d>=0.9.0",
   "ocp_vscode",
   "nicegui",
   "pywebview",
+  "rich",
+  "jinja2",
+  "copier",
+  "pytest",
+  "pyperclip",
+  "sphinx",
+  "sphinxcontrib-mermaid",
 ]
 description = "A nicegui-based CAD editor and viewer for OCP-based projects like build123d"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.black]
+target-version = ["py310", "py311", "py312", "py313"]
+line-length = 88
