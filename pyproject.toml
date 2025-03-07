@@ -26,8 +26,17 @@ dependencies = [
 ]
 description = "A nicegui-based CAD editor and viewer for OCP-based projects like build123d"
 
+[tool.setuptools]
+# ...
+# By default, include-package-data is true in pyproject.toml, so you do
+# NOT have to specify this line.
+include-package-data = true
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.py", "*.md"]
 
 [tool.black]
 target-version = ["py310", "py311", "py312", "py313"]
