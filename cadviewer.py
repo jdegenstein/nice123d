@@ -36,21 +36,23 @@ license:
 from nicegui import app, ui
 from nicegui.events import KeyEventArguments
 import subprocess
-
 app.native.window_args["resizable"] = True
 app.native.start_args["debug"] = True
 # app.native.settings['ALLOW_DOWNLOADS'] = True # export "downloads" ?
-app.native.settings["MATPLOTLIB"] = False
 
 editor_fontsize = 18
 # TODO: consider separate editor execution thread from nicegui thread
-
+import platform
 
 # run ocp_vscode in a subprocess
 def startup_all():
     global ocpcv_proc
+    
+    if platform.system == "Windows":
+        ocpcv_proc = subprocess.Popen([r"uv\uv.exe", "run", "python", "-m", "ocp_vscode"])
+    else:
+        ocpcv_proc = subprocess.Popen([r"uv/uv", "run", "python", "-m", "ocp_vscode"])
     # spawn separate viewer process
-    ocpcv_proc = subprocess.Popen(["python", "-m", "ocp_vscode"])
     # pre-import build123d and ocp_vscode in main thread
     exec("from build123d import *\nfrom ocp_vscode import *")
 
@@ -83,7 +85,7 @@ with ui.splitter().classes(
             # ui.button('shutdown', on_click=lambda: shutdown_all()) # just close the window
             code = (
                 ui.codemirror(
-                    'print("Edit me!")\nprint("hello world")',
+                    'from build123d import *\nfrom ocp_vscode import *\nset_port(3939)\na_box = Box(1,2,3)\nshow(a_box)',
                     language="Python",
                     theme="vscodeLight",
                 )
@@ -111,8 +113,8 @@ keyboard = ui.keyboard(on_key=handle_key)
 app.on_shutdown(shutdown_all)  # register shutdown handler
 ui.run(
     native=True,
-    window_size=(1800, 900),
-    title="nicegui-cadviewer",
+    window_size=(1700, 900),
+    title="nice123d",
     fullscreen=False,
     reload=False,
 )
