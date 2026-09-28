@@ -7,6 +7,15 @@ project-id:   e2bbd03f-0ac6-41ec-89ae-2ad52fa0652a
 description:  This file contains the main information for the `nice123d` project.
 
 -->
+
+# ⚠️ DEPRECATED
+
+> This project is no longer actively maintained or supported. 
+> 
+> **Alternatives:** If you are looking for an active alternative, please consider using [bernhard-42/build123d-studio](https://github.com/bernhard-42/build123d-studio) instead.
+
+
+
 # README: nice123d
 A nicegui-based CAD editor and viewer for OCP-based projects like build123d.
 
